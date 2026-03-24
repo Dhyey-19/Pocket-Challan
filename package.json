@@ -1,0 +1,23 @@
+{
+  "name": "pocket-challan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web app with local SQLite database",
+  "main": "server.js",
+  "bin": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build:public": "node scripts/build-public.js",
+    "build:client": "node scripts/build-client.js",
+    "build:win": "node scripts/build-win.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7",
+    "bytenode": "^1.5.7"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "pkg": "^5.8.1"
+  }
+}
