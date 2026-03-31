@@ -678,12 +678,13 @@ window.AppComponents = (() => {
                     <th className="num">PCS</th>
                     <th className="num">Rate</th>
                     <th className="num">Amount</th>
+                    <th>Notes</th>
                   </tr>
                 </thead>
                 <tbody>
                   {statement.rows.length === 0 ? (
                     <tr>
-                      <td colSpan="8">No records found.</td>
+                      <td colSpan="9">No records found.</td>
                     </tr>
                   ) : (
                     statement.rows.map((row, index) => (
@@ -702,16 +703,18 @@ window.AppComponents = (() => {
                           {row.ratePcs ? formatNumber(row.ratePcs, 2) : ""}
                         </td>
                         <td className="num">{formatNumber(row.amount, 2)}</td>
+                        <td>{row.notes || ""}</td>
                       </tr>
                     ))
                   )}
                   <tr>
-                    <td colSpan="7">
+                    <td colSpan="8">
                       <strong>Total Challan Amount</strong>
                     </td>
                     <td className="num">
                       <strong>{formatNumber(statement.challanAmount || 0, 2)}</strong>
                     </td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>

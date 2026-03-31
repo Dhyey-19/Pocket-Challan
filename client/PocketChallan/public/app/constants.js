@@ -1,5 +1,5 @@
 window.AppConstants = {
-  appVersion: "20260324",
+  appVersion: "20260331",
   menuItems: [
     "Dashboard",
     "Party Master",

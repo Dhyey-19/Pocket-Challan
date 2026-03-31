@@ -184,7 +184,7 @@ function listChallanSalesItems(challanId) {
 function listChallanSalesItemsByPartyAndDate(partyId, startDate, endDate) {
   return new Promise((resolve, reject) => {
     db.all(
-      "SELECT cs.challanNo, cs.challanDate, csi.netWeight, csi.pcs, csi.unit, csi.rate, csi.amount, im.itemName FROM challan_sales cs JOIN challan_sales_items csi ON csi.challanId = cs.id JOIN item_master im ON im.id = csi.itemId WHERE cs.partyId = ? AND cs.challanDate BETWEEN ? AND ? ORDER BY cs.challanDate ASC, cs.challanNo ASC, csi.id ASC",
+      "SELECT cs.challanNo, cs.challanDate, csi.netWeight, csi.pcs, csi.unit, csi.rate, csi.amount, csi.notes, im.itemName FROM challan_sales cs JOIN challan_sales_items csi ON csi.challanId = cs.id JOIN item_master im ON im.id = csi.itemId WHERE cs.partyId = ? AND cs.challanDate BETWEEN ? AND ? ORDER BY cs.challanDate ASC, cs.challanNo ASC, csi.id ASC",
       [partyId, startDate, endDate],
       (err, rows) => {
         if (err) {

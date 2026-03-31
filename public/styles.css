@@ -462,6 +462,12 @@ body::before {
   background: #f7f7f7;
 }
 
+.report-card {
+  align-self: start;
+  padding-top: 14px;
+  gap: 8px;
+}
+
 .muted {
   color: var(--muted);
   font-size: 13px;

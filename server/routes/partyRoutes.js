@@ -152,6 +152,7 @@ router.get("/party-statement", async (req, res) => {
         challanNo: row.challanNo,
         date: row.challanDate,
         product: row.itemName,
+        notes: row.notes || "",
         netWeight: Number(row.netWeight || 0),
         pcs: Number(row.pcs || 0),
         unit: row.unit || "",

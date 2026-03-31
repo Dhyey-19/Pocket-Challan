@@ -14,6 +14,7 @@ const {
   buildMaterialOutPrintHtml,
   buildMaterialInPrintHtml,
   buildMaterialInOutPrintHtml,
+  buildPartyStatementPrintHtml,
   buildPartyListPrintHtml,
   buildItemListPrintHtml
 } = window.AppUtils;
@@ -187,6 +188,7 @@ function App() {
   const [statementLoading, setStatementLoading] = useState(false);
   const [statementError, setStatementError] = useState("");
   const [statementData, setStatementData] = useState(null);
+  const [statementPrintError, setStatementPrintError] = useState("");
   const [quickAction, setQuickAction] = useState("");
   const [dashboardData, setDashboardData] = useState({
     salesPaymentsTotal: 0,
@@ -1165,6 +1167,7 @@ function App() {
   const handleGenerateStatement = (event) => {
     event.preventDefault();
     setStatementError("");
+    setStatementPrintError("");
 
     if (!statementPartyId) {
       setStatementError("Party is required.");
@@ -1242,6 +1245,25 @@ function App() {
         setStatementError(err.message || "Unable to load statement.");
         setStatementLoading(false);
       });
+  };
+
+  const handlePrintPartyStatement = () => {
+    setStatementPrintError("");
+
+    if (!statementData) {
+      setStatementPrintError("Generate a statement before printing.");
+      return;
+    }
+
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) {
+      setStatementPrintError("Popup blocked. Allow popups to print.");
+      return;
+    }
+
+    printWindow.document.open();
+    printWindow.document.write(buildPartyStatementPrintHtml(statementData));
+    printWindow.document.close();
   };
 
   const handleGenerateMaterialInOutReport = (event) => {
@@ -3044,8 +3066,10 @@ function App() {
             onStartDateChange={setStatementStartDate}
             onEndDateChange={setStatementEndDate}
             onSubmit={handleGenerateStatement}
+            onPrint={handlePrintPartyStatement}
             loading={statementLoading}
             error={statementError}
+            printError={statementPrintError}
             statement={statementData}
             formatNumber={formatNumber}
           />

@@ -600,8 +600,10 @@ window.AppComponents = (() => {
     onStartDateChange,
     onEndDateChange,
     onSubmit,
+    onPrint,
     loading,
     error,
+    printError,
     statement,
     formatNumber
   }) => (
@@ -656,15 +658,52 @@ window.AppComponents = (() => {
 
       {statement ? (
         <>
-          <div className="card">
-            <div style={{ display: "grid", gap: "6px", marginBottom: "12px" }}>
-              <div>
-                <strong>Party Name.</strong> {statement.partyName}
-              </div>
-              <div>
-                <strong>Duration.</strong> From {statement.startDate} to {statement.endDate}
-              </div>
+          <div className="card report-meta">
+            <div>
+              <strong>Party Name.</strong> {statement.partyName}
             </div>
+            <div>
+              <strong>Duration.</strong> From {statement.startDate} to {statement.endDate}
+            </div>
+            <div className="report-actions">
+              <button
+                className="ghost icon-button report-print"
+                type="button"
+                onClick={onPrint}
+                aria-label="Print Party Statement"
+                title="Print"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M7 8V4h10v4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinejoin="round"
+                  />
+                  <rect
+                    x="6"
+                    y="14"
+                    width="12"
+                    height="6"
+                    rx="1.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  />
+                  <path
+                    d="M6 11h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2Z"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            {printError ? <div className="notice report-print-error">{printError}</div> : null}
+          </div>
+          <div className="card">
             <div className="table-wrap">
               <table className="data-table">
                 <thead>
@@ -677,12 +716,13 @@ window.AppComponents = (() => {
                     <th className="num">PCS</th>
                     <th className="num">Rate</th>
                     <th className="num">Amount</th>
+                    <th>Notes</th>
                   </tr>
                 </thead>
                 <tbody>
                   {statement.rows.length === 0 ? (
                     <tr>
-                      <td colSpan="8">No records found.</td>
+                      <td colSpan="9">No records found.</td>
                     </tr>
                   ) : (
                     statement.rows.map((row, index) => (
@@ -701,16 +741,18 @@ window.AppComponents = (() => {
                           {row.ratePcs ? formatNumber(row.ratePcs, 2) : ""}
                         </td>
                         <td className="num">{formatNumber(row.amount, 2)}</td>
+                        <td>{row.notes || ""}</td>
                       </tr>
                     ))
                   )}
                   <tr>
-                    <td colSpan="7">
+                    <td colSpan="8">
                       <strong>Total Challan Amount</strong>
                     </td>
                     <td className="num">
                       <strong>{formatNumber(statement.challanAmount || 0, 2)}</strong>
                     </td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>
@@ -2353,7 +2395,7 @@ window.AppComponents = (() => {
 
       {report ? (
         <div className="module-grid">
-          <div className="card">
+          <div className="card report-card">
             <h4>Material outward</h4>
             <div className="table-wrap">
               <table className="data-table">
@@ -2397,7 +2439,7 @@ window.AppComponents = (() => {
             </div>
           </div>
 
-          <div className="card">
+          <div className="card report-card">
             <h4>Material inward</h4>
             <div className="table-wrap">
               <table className="data-table">
@@ -2451,7 +2493,7 @@ window.AppComponents = (() => {
 
       {report ? (
         <div className="module-grid">
-          <div className="card">
+          <div className="card report-card report-card-payments">
             <h4>Payments</h4>
             <div className="table-wrap">
               <table className="data-table">
@@ -2490,7 +2532,7 @@ window.AppComponents = (() => {
             </div>
           </div>
 
-          <div className="card">
+          <div className="card report-card report-card-summary">
             <h4>Summary</h4>
             <div className="table-wrap">
               <table className="data-table">

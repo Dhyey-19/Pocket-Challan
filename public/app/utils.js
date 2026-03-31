@@ -88,7 +88,7 @@ window.AppUtils = (() => {
       )
       .join("");
 
-    const maxRows = 10;
+    const maxRows = 5;
     const blankRowCount = Math.max(0, maxRows - items.length);
     const blankRowsHtml = Array.from({ length: blankRowCount })
       .map(
@@ -117,30 +117,32 @@ window.AppUtils = (() => {
               @page { margin: 6mm; }
               body { font-family: "Times New Roman", serif; margin: 0; padding: 6mm; color: #000; }
             @media print { html, body { height: 100%; } body { -webkit-print-color-adjust: exact; } }
-            .title { text-align: center; font-size: 15px; font-weight: bold; margin-bottom: 6px; }
-            .header-grid { border: 1px solid #000; border-bottom: none; padding: 6px; font-size: 9px; }
+            .title { text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+            .header-grid { border: 1px solid #000; border-bottom: none; padding: 10px; font-size: 13px; }
             .header-row { display: flex; justify-content: space-between; gap: 8px; }
             .header-row + .header-row { margin-top: 4px; }
             .label { font-weight: bold; }
-            .value { font-weight: bold; }
-              table { width: 100%; border-collapse: collapse; font-size: 10px; margin-top: -1px; }
-              .col-desc { width: 36%; }
-              .col-gross { width: 10%; }
+            .value { font-weight: bold; font-size: 14px; }
+              table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: -1px; }
+              .col-desc { width: 34%; }
+              .col-gross { width: 12%; }
               .col-bags { width: 8%; }
               .col-less { width: 8%; }
               .col-net { width: 10%; }
               .col-pcs { width: 6%; }
+              .col-notes { width: 12%; }
             th, td { border: 1px solid #000; padding: 3px; text-align: left; }
+            tbody tr:nth-child(-n+2) td { padding-top: 6px; padding-bottom: 6px; }
+            th { padding-top: 6px; padding-bottom: 6px; }
             th { text-align: center; font-weight: bold; }
             .num { text-align: right; }
-            .totals td { font-weight: bold; }
+            .totals td { font-weight: bold; padding-top: 8px; padding-bottom: 8px; }
+            .footer-row td { height: 44px; vertical-align: top; }
+            .footer-label { font-weight: bold; display: block; }
             .page { min-height: 100%; display: flex; flex-direction: column; }
-            .content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+            .content { flex: 1; display: flex; flex-direction: column; gap: 0; }
             .spacer { flex: 1; }
-            .blank td { height: 22px; border-top: none; border-bottom: none; }
-              .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 10px; }
-            .footer-table td { border-right: 1px solid #000; padding: 4px 6px; vertical-align: top; height: 32px; }
-            .footer-table td:last-child { border-right: none; text-align: right; }
+            .blank td { height: 34px; }
             .sign { font-weight: bold; text-align: right; }
           </style>
         </head>
@@ -166,7 +168,7 @@ window.AppUtils = (() => {
                   <col class="col-less" />
                   <col class="col-net" />
                   <col class="col-pcs" />
-                  <col />
+                  <col class="col-notes" />
                 </colgroup>
             <thead>
               <tr>
@@ -191,26 +193,26 @@ window.AppUtils = (() => {
                 <td class="num">${formatNumber(totals.pcs, 0)}</td>
                 <td></td>
               </tr>
+              <tr class="footer-row">
+                <td colspan="2">
+                  <span class="footer-label">Remarks</span>
+                  <span>${challan.remarks || ""}</span>
+                </td>
+                <td colspan="2">
+                  <span class="footer-label">Vehicle</span>
+                  <span>${challan.vehicleNo || ""}</span>
+                </td>
+                <td colspan="2">
+                  <span class="footer-label">Bill No.</span>
+                  <span>${challan.billNo || ""}</span>
+                </td>
+                <td class="sign">
+                  <span class="footer-label">Sign</span>
+                </td>
+              </tr>
             </tbody>
               </table>
             </div>
-            <table class="footer-table">
-              <tr>
-                <td>
-                  <div class="label">Remarks</div>
-                  <div>${challan.remarks || ""}</div>
-                </td>
-                <td>
-                  <div class="label">Vehicle</div>
-                  <div>${challan.vehicleNo || ""}</div>
-                </td>
-                <td>
-                  <div class="label">Bill No.</div>
-                  <div>${challan.billNo || ""}</div>
-                </td>
-                <td class="sign">Sign</td>
-              </tr>
-            </table>
           </div>
           <script>
             window.print();
@@ -249,7 +251,7 @@ window.AppUtils = (() => {
       )
       .join("");
 
-    const maxRows = 10;
+    const maxRows = 5;
     const blankRowCount = Math.max(0, maxRows - items.length);
     const blankRowsHtml = Array.from({ length: blankRowCount })
       .map(
@@ -277,30 +279,32 @@ window.AppUtils = (() => {
             * { box-sizing: border-box; }
             body { font-family: "Times New Roman", serif; margin: 0; padding: 6mm; color: #000; }
             @media print { html, body { height: 100%; } body { -webkit-print-color-adjust: exact; } }
-            .title { text-align: center; font-size: 15px; font-weight: bold; margin-bottom: 6px; }
-            .header-grid { border: 1px solid #000; border-bottom: none; padding: 6px; font-size: 9px; }
+            .title { text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+            .header-grid { border: 1px solid #000; border-bottom: none; padding: 10px; font-size: 13px; }
             .header-row { display: flex; justify-content: space-between; gap: 8px; }
             .header-row + .header-row { margin-top: 4px; }
             .label { font-weight: bold; }
-            .value { font-weight: bold; }
-            table { width: 100%; border-collapse: collapse; font-size: 10px; margin-top: -1px; }
+            .value { font-weight: bold; font-size: 14px; }
+            table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: -1px; }
             .col-desc { width: 36%; }
-            .col-gross { width: 10%; }
+            .col-gross { width: 12%; }
             .col-bags { width: 8%; }
             .col-less { width: 8%; }
             .col-net { width: 10%; }
             .col-pcs { width: 6%; }
+            .col-process { width: 6%; }
             th, td { border: 1px solid #000; padding: 3px; text-align: left; }
+            tbody tr:nth-child(-n+2) td { padding-top: 6px; padding-bottom: 6px; }
+            th { padding-top: 6px; padding-bottom: 6px; }
             th { text-align: center; font-weight: bold; }
             .num { text-align: right; }
-            .totals td { font-weight: bold; }
+            .totals td { font-weight: bold; padding-top: 8px; padding-bottom: 8px; }
+            .footer-row td { height: 44px; vertical-align: top; }
+            .footer-label { font-weight: bold; display: block; }
             .page { min-height: 100%; display: flex; flex-direction: column; }
-            .content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+            .content { flex: 1; display: flex; flex-direction: column; gap: 0; }
             .spacer { flex: 1; }
-            .blank td { height: 22px; border-top: none; border-bottom: none; }
-            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 10px; }
-            .footer-table td { border-right: 1px solid #000; padding: 4px 6px; vertical-align: top; height: 32px; }
-            .footer-table td:last-child { border-right: none; text-align: right; }
+            .blank td { height: 34px; }
             .sign { font-weight: bold; text-align: right; }
           </style>
         </head>
@@ -326,7 +330,7 @@ window.AppUtils = (() => {
                   <col class="col-less" />
                   <col class="col-net" />
                   <col class="col-pcs" />
-                  <col />
+                  <col class="col-process" />
                 </colgroup>
             <thead>
               <tr>
@@ -351,22 +355,22 @@ window.AppUtils = (() => {
                 <td class="num">${formatNumber(totals.pcs, 0)}</td>
                 <td></td>
               </tr>
+              <tr class="footer-row">
+                <td colspan="3">
+                  <span class="footer-label">Remarks</span>
+                  <span>${challan.remarks || ""}</span>
+                </td>
+                <td colspan="3">
+                  <span class="footer-label">Vehicle</span>
+                  <span>${challan.vehicleNo || ""}</span>
+                </td>
+                <td class="sign">
+                  <span class="footer-label">Sign</span>
+                </td>
+              </tr>
             </tbody>
               </table>
             </div>
-            <table class="footer-table">
-              <tr>
-                <td>
-                  <div class="label">Remarks</div>
-                  <div>${challan.remarks || ""}</div>
-                </td>
-                <td>
-                  <div class="label">Vehicle</div>
-                  <div>${challan.vehicleNo || ""}</div>
-                </td>
-                <td class="sign">Sign</td>
-              </tr>
-            </table>
           </div>
           <script>
             window.print();
@@ -430,18 +434,34 @@ window.AppUtils = (() => {
           <title>Material In-Out Report</title>
           <style>
             * { box-sizing: border-box; }
-            body { font-family: "Times New Roman", serif; margin: 0; padding: 6mm; color: #000; }
+            @page { size: A4 landscape; margin: 8mm; }
+            body { font-family: "Times New Roman", serif; margin: 0; padding: 8mm; color: #000; }
             @media print { html, body { height: 100%; } body { -webkit-print-color-adjust: exact; } }
             h1 { text-align: center; font-size: 16px; margin: 0 0 8px; }
-            h2 { font-size: 12px; margin: 10px 0 4px; }
+            h2 { font-size: 12px; margin: 0 0 4px; }
             .meta { display: flex; justify-content: space-between; gap: 8px; border: 1px solid #000; padding: 6px; font-size: 10px; }
             .meta strong { font-weight: bold; }
             table { width: 100%; border-collapse: collapse; font-size: 9px; }
             th, td { border: 1px solid #000; padding: 3px; text-align: left; }
             th { text-align: center; font-weight: bold; }
             .num { text-align: right; }
-            .totals td { font-weight: bold; }
-            .section { margin-top: 10px; }
+            .totals td { font-weight: bold; padding-top: 8px; padding-bottom: 8px; }
+            .section { margin-top: 0; }
+            .layout-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: auto auto;
+              grid-template-areas:
+                "outward inward"
+                "payments summary";
+              gap: 10px;
+              margin-top: 6px;
+              align-items: start;
+            }
+            .area-outward { grid-area: outward; }
+            .area-inward { grid-area: inward; }
+            .area-payments { grid-area: payments; }
+            .area-summary { grid-area: summary; }
           </style>
         </head>
         <body>
@@ -451,54 +471,214 @@ window.AppUtils = (() => {
             <div><strong>Duration:</strong> ${report.startDate || ""} to ${report.endDate || ""}</div>
           </div>
 
-          <div class="section">
-            <h2>Material outward</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Ch#</th>
-                  <th>Date</th>
-                  <th>Item</th>
-                  <th>Net Wt</th>
-                  <th>PCS</th>
-                  <th>Proc</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${outwardRows || `<tr><td colspan="6">No material outward records found.</td></tr>`}
-                <tr class="totals">
-                  <td colspan="3">Total</td>
-                  <td class="num">${formatNumber(report.totals.totalOutwardWeight, 3)}</td>
-                  <td class="num">${formatNumber(report.totals.totalOutwardPcs, 0)}</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="layout-grid">
+            <div class="section area-outward">
+              <h2>Material outward</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Ch#</th>
+                    <th>Date</th>
+                    <th>Item</th>
+                    <th>Net Wt</th>
+                    <th>PCS</th>
+                    <th>Proc</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${outwardRows || `<tr><td colspan="6">No material outward records found.</td></tr>`}
+                  <tr class="totals">
+                    <td colspan="3">Total</td>
+                    <td class="num">${formatNumber(report.totals.totalOutwardWeight, 3)}</td>
+                    <td class="num">${formatNumber(report.totals.totalOutwardPcs, 0)}</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="section area-inward">
+              <h2>Material inward</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Ch#</th>
+                    <th>Date</th>
+                    <th>Item</th>
+                    <th>Net Wt</th>
+                    <th>PCS</th>
+                    <th>Rate</th>
+                    <th>Amt</th>
+                    <th>Proc</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${inwardRows || `<tr><td colspan="8">No material inward records found.</td></tr>`}
+                  <tr class="totals">
+                    <td colspan="3">Total</td>
+                    <td class="num">${formatNumber(report.totals.totalInwardWeight, 3)}</td>
+                    <td class="num">${formatNumber(report.totals.totalInwardPcs, 0)}</td>
+                    <td></td>
+                    <td class="num">${formatNumber(report.totals.totalPayment, 2)}</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="section area-payments">
+              <h2>Payments</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Rcpt#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${paymentRows || `<tr><td colspan="4">No payments found.</td></tr>`}
+                  <tr class="totals">
+                    <td colspan="2">Total</td>
+                    <td class="num">${formatNumber(report.totals.paymentMade, 2)}</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="section area-summary">
+              <h2>Summary</h2>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Total outward</td>
+                    <td class="num">${formatNumber(report.totals.totalOutwardWeight, 3)}</td>
+                  </tr>
+                  <tr>
+                    <td>Total job done</td>
+                    <td class="num">${formatNumber(report.totals.totalJobDoneWeight, 3)}</td>
+                  </tr>
+                  <tr>
+                    <td>Total extra material</td>
+                    <td class="num">${formatNumber(report.totals.totalExtraMaterialWeight, 3)}</td>
+                  </tr>
+                  <tr>
+                    <td>Balance material</td>
+                    <td class="num">${formatNumber(report.totals.balanceMaterial, 3)}</td>
+                  </tr>
+                  <tr>
+                    <td>Total payment</td>
+                    <td class="num">${formatNumber(report.totals.totalPayment, 2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Payment made</td>
+                    <td class="num">${formatNumber(report.totals.paymentMade, 2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Outstanding amount</td>
+                    <td class="num">${formatNumber(report.totals.outstandingAmount, 2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Balance PCS</td>
+                    <td class="num">${formatNumber(report.totals.balancePcs, 0)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <script>
+            window.print();
+          </script>
+        </body>
+      </html>
+    `;
+  };
+
+  const buildPartyStatementPrintHtml = (statement) => {
+    const rowsHtml = (statement.rows || [])
+      .map(
+        (row) => `
+          <tr>
+            <td>${row.challanNo || "-"}</td>
+            <td>${row.date || ""}</td>
+            <td>${row.product || ""}</td>
+            <td class="num">${row.netWeight ? formatNumber(row.netWeight, 3) : ""}</td>
+            <td class="num">${row.rateWeight ? formatNumber(row.rateWeight, 2) : ""}</td>
+            <td class="num">${row.pcs ? formatNumber(row.pcs, 0) : ""}</td>
+            <td class="num">${row.ratePcs ? formatNumber(row.ratePcs, 2) : ""}</td>
+            <td class="num">${formatNumber(row.amount, 2)}</td>
+            <td>${row.notes || ""}</td>
+          </tr>
+        `
+      )
+      .join("");
+
+    const paymentRows = (statement.payments || [])
+      .map(
+        (payment) => `
+          <tr>
+            <td>${payment.receiptNo || ""}</td>
+            <td>${payment.receiptDate || ""}</td>
+            <td>${payment.transactionType || ""}</td>
+            <td class="num">${formatNumber(payment.amount, 2)}</td>
+            <td>${payment.remarks || "-"}</td>
+          </tr>
+        `
+      )
+      .join("");
+
+    return `
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <title>Party Statement</title>
+          <style>
+            * { box-sizing: border-box; }
+            @page { size: A4; margin: 10mm; }
+            body { font-family: "Times New Roman", serif; margin: 0; padding: 10mm; color: #000; }
+            @media print { html, body { height: 100%; } body { -webkit-print-color-adjust: exact; } }
+            h1 { text-align: center; font-size: 22px; margin: 0 0 10px; }
+            .meta { display: flex; justify-content: space-between; gap: 8px; border: 1px solid #000; padding: 8px; font-size: 13px; }
+            .meta strong { font-weight: bold; }
+            table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+            th, td { border: 1px solid #000; padding: 6px; text-align: left; }
+            th { text-align: center; font-weight: bold; }
+            .num { text-align: right; }
+            .section { margin-top: 10px; }
+            .totals td { font-weight: bold; }
+          </style>
+        </head>
+        <body>
+          <h1>Party Statement</h1>
+          <div class="meta">
+            <div><strong>Party Name:</strong> ${statement.partyName || ""}</div>
+            <div><strong>Duration:</strong> ${statement.startDate || ""} to ${statement.endDate || ""}</div>
           </div>
 
           <div class="section">
-            <h2>Material inward</h2>
             <table>
               <thead>
                 <tr>
-                  <th>Ch#</th>
+                  <th>Challan No</th>
                   <th>Date</th>
-                  <th>Item</th>
+                  <th>Product</th>
                   <th>Net Wt</th>
+                  <th>Rate</th>
                   <th>PCS</th>
                   <th>Rate</th>
-                  <th>Amt</th>
-                  <th>Proc</th>
+                  <th>Amount</th>
+                  <th>Notes</th>
                 </tr>
               </thead>
               <tbody>
-                ${inwardRows || `<tr><td colspan="8">No material inward records found.</td></tr>`}
+                ${rowsHtml || `<tr><td colspan="9">No records found.</td></tr>`}
                 <tr class="totals">
-                  <td colspan="3">Total</td>
-                  <td class="num">${formatNumber(report.totals.totalInwardWeight, 3)}</td>
-                  <td class="num">${formatNumber(report.totals.totalInwardPcs, 0)}</td>
-                  <td></td>
-                  <td class="num">${formatNumber(report.totals.totalPayment, 2)}</td>
+                  <td colspan="7">Total Challan Amount</td>
+                  <td class="num">${formatNumber(statement.challanAmount || 0, 2)}</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -506,21 +686,22 @@ window.AppUtils = (() => {
           </div>
 
           <div class="section">
-            <h2>Payments</h2>
+            <h2 style="font-size: 12px; margin: 0 0 4px;">Payments</h2>
             <table>
               <thead>
                 <tr>
+                  <th>Receipt No.</th>
                   <th>Date</th>
                   <th>Type</th>
                   <th>Amount</th>
-                  <th>Rcpt#</th>
+                  <th>Remarks</th>
                 </tr>
               </thead>
               <tbody>
-                ${paymentRows || `<tr><td colspan="4">No payments found.</td></tr>`}
+                ${paymentRows || `<tr><td colspan="5">No payments found.</td></tr>`}
                 <tr class="totals">
-                  <td colspan="2">Total</td>
-                  <td class="num">${formatNumber(report.totals.paymentMade, 2)}</td>
+                  <td colspan="3">Total Payments</td>
+                  <td class="num">${formatNumber(statement.paymentsTotal || 0, 2)}</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -528,40 +709,22 @@ window.AppUtils = (() => {
           </div>
 
           <div class="section">
-            <h2>Summary</h2>
+            <h2 style="font-size: 12px; margin: 0 0 4px;">Summary</h2>
             <table>
+              <thead>
+                <tr>
+                  <th>Opening Balance</th>
+                  <th>Challan Amount</th>
+                  <th>Payments</th>
+                  <th>Closing Balance</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
-                  <td>Total outward</td>
-                  <td class="num">${formatNumber(report.totals.totalOutwardWeight, 3)}</td>
-                </tr>
-                <tr>
-                  <td>Total job done</td>
-                  <td class="num">${formatNumber(report.totals.totalJobDoneWeight, 3)}</td>
-                </tr>
-                <tr>
-                  <td>Total extra material</td>
-                  <td class="num">${formatNumber(report.totals.totalExtraMaterialWeight, 3)}</td>
-                </tr>
-                <tr>
-                  <td>Balance material</td>
-                  <td class="num">${formatNumber(report.totals.balanceMaterial, 3)}</td>
-                </tr>
-                <tr>
-                  <td>Total payment</td>
-                  <td class="num">${formatNumber(report.totals.totalPayment, 2)}</td>
-                </tr>
-                <tr>
-                  <td>Payment made</td>
-                  <td class="num">${formatNumber(report.totals.paymentMade, 2)}</td>
-                </tr>
-                <tr>
-                  <td>Outstanding amount</td>
-                  <td class="num">${formatNumber(report.totals.outstandingAmount, 2)}</td>
-                </tr>
-                <tr>
-                  <td>Balance PCS</td>
-                  <td class="num">${formatNumber(report.totals.balancePcs, 0)}</td>
+                  <td class="num">${formatNumber(statement.openingBalance || 0, 2)}</td>
+                  <td class="num">${formatNumber(statement.challanAmount || 0, 2)}</td>
+                  <td class="num">${formatNumber(statement.paymentsTotal || 0, 2)}</td>
+                  <td class="num">${formatNumber(statement.closingBalance || statement.balance || 0, 2)}</td>
                 </tr>
               </tbody>
             </table>
@@ -715,7 +878,7 @@ window.AppUtils = (() => {
       )
       .join("");
 
-    const maxRows = 10;
+    const maxRows = 5;
     const blankRowCount = Math.max(0, maxRows - items.length);
     const blankRowsHtml = Array.from({ length: blankRowCount })
       .map(
@@ -743,30 +906,32 @@ window.AppUtils = (() => {
             * { box-sizing: border-box; }
             body { font-family: "Times New Roman", serif; margin: 0; padding: 6mm; color: #000; }
             @media print { html, body { height: 100%; } body { -webkit-print-color-adjust: exact; } }
-            .title { text-align: center; font-size: 15px; font-weight: bold; margin-bottom: 6px; }
-            .header-grid { border: 1px solid #000; border-bottom: none; padding: 6px; font-size: 9px; }
+            .title { text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+            .header-grid { border: 1px solid #000; border-bottom: none; padding: 10px; font-size: 13px; }
             .header-row { display: flex; justify-content: space-between; gap: 8px; }
             .header-row + .header-row { margin-top: 4px; }
             .label { font-weight: bold; }
-            .value { font-weight: bold; }
-            table { width: 100%; border-collapse: collapse; font-size: 10px; margin-top: -1px; }
+            .value { font-weight: bold; font-size: 14px; }
+            table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: -1px; }
             .col-desc { width: 36%; }
-            .col-gross { width: 10%; }
+            .col-gross { width: 12%; }
             .col-bags { width: 8%; }
             .col-less { width: 8%; }
             .col-net { width: 10%; }
             .col-pcs { width: 6%; }
+            .col-process { width: 6%; }
             th, td { border: 1px solid #000; padding: 3px; text-align: left; }
+            tbody tr:nth-child(-n+2) td { padding-top: 6px; padding-bottom: 6px; }
+            th { padding-top: 6px; padding-bottom: 6px; }
             th { text-align: center; font-weight: bold; }
             .num { text-align: right; }
-            .totals td { font-weight: bold; }
+            .totals td { font-weight: bold; padding-top: 8px; padding-bottom: 8px; }
+            .footer-row td { height: 44px; vertical-align: top; }
+            .footer-label { font-weight: bold; display: block; }
             .page { min-height: 100%; display: flex; flex-direction: column; }
-            .content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+            .content { flex: 1; display: flex; flex-direction: column; gap: 0; }
             .spacer { flex: 1; }
-            .blank td { height: 22px; border-top: none; border-bottom: none; }
-            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 10px; }
-            .footer-table td { border-right: 1px solid #000; padding: 4px 6px; vertical-align: top; height: 32px; }
-            .footer-table td:last-child { border-right: none; text-align: right; }
+            .blank td { height: 34px; }
             .sign { font-weight: bold; text-align: right; }
           </style>
         </head>
@@ -792,7 +957,7 @@ window.AppUtils = (() => {
                   <col class="col-less" />
                   <col class="col-net" />
                   <col class="col-pcs" />
-                  <col />
+                  <col class="col-process" />
                 </colgroup>
             <thead>
               <tr>
@@ -817,22 +982,22 @@ window.AppUtils = (() => {
                 <td class="num">${formatNumber(totals.pcs, 0)}</td>
                 <td></td>
               </tr>
+              <tr class="footer-row">
+                <td colspan="3">
+                  <span class="footer-label">Remarks</span>
+                  <span>${challan.remarks || ""}</span>
+                </td>
+                <td colspan="3">
+                  <span class="footer-label">Vehicle</span>
+                  <span>${challan.vehicleNo || ""}</span>
+                </td>
+                <td class="sign">
+                  <span class="footer-label">Sign</span>
+                </td>
+              </tr>
             </tbody>
               </table>
             </div>
-            <table class="footer-table">
-              <tr>
-                <td>
-                  <div class="label">Remarks</div>
-                  <div>${challan.remarks || ""}</div>
-                </td>
-                <td>
-                  <div class="label">Vehicle</div>
-                  <div>${challan.vehicleNo || ""}</div>
-                </td>
-                <td class="sign">Sign</td>
-              </tr>
-            </table>
           </div>
           <script>
             window.print();
@@ -855,6 +1020,7 @@ window.AppUtils = (() => {
     buildMaterialOutPrintHtml,
     buildMaterialInPrintHtml,
     buildMaterialInOutPrintHtml,
+    buildPartyStatementPrintHtml,
     buildPartyListPrintHtml,
     buildItemListPrintHtml
   };

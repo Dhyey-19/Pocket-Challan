@@ -92,7 +92,7 @@ window.AppUtils = (() => {
       )
       .join("");
 
-    const maxRows = 10;
+    const maxRows = 5;
     const blankRowCount = Math.max(0, maxRows - items.length);
     const blankRowsHtml = Array.from({ length: blankRowCount })
       .map(
@@ -123,29 +123,32 @@ window.AppUtils = (() => {
             * { box-sizing: border-box; }
             body { font-family: "Times New Roman", serif; margin: 0; padding: 6mm; color: #000; }
             @media print { html, body { height: 100%; } body { -webkit-print-color-adjust: exact; } }
-            .title { text-align: center; font-size: 15px; font-weight: bold; margin-bottom: 6px; }
-            .header-grid { border: 1px solid #000; border-bottom: none; padding: 6px; font-size: 9px; }
+            .title { text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+            .header-grid { border: 1px solid #000; border-bottom: none; padding: 10px; font-size: 13px; }
             .header-row { display: flex; justify-content: space-between; gap: 8px; }
             .header-row + .header-row { margin-top: 4px; }
             .label { font-weight: bold; }
-            .value { font-weight: bold; }
-            table { width: 100%; border-collapse: collapse; font-size: 10px; margin-top: -1px; }
+            .value { font-weight: bold; font-size: 14px; }
+            table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: -1px; }
             .col-desc { width: 36%; }
-            .col-gross { width: 10%; }
+            .col-gross { width: 12%; }
             .col-bags { width: 8%; }
             .col-less { width: 8%; }
             .col-net { width: 10%; }
             .col-pcs { width: 6%; }
+            .col-process { width: 6%; }
             th, td { border: 1px solid #000; padding: 3px; text-align: left; }
+            tbody tr:nth-child(-n+2) td { padding-top: 6px; padding-bottom: 6px; }
+            th { padding-top: 6px; padding-bottom: 6px; }
             th { text-align: center; font-weight: bold; }
             .num { text-align: right; }
-            .totals td { font-weight: bold; }
+            .totals td { font-weight: bold; padding-top: 8px; padding-bottom: 8px; }
             .page { min-height: 100%; display: flex; flex-direction: column; }
-            .content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+            .content { flex: 1; display: flex; flex-direction: column; gap: 0; }
             .spacer { flex: 1; }
-            .blank td { height: 22px; border-top: none; border-bottom: none; }
-            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 10px; }
-            .footer-table td { border-right: 1px solid #000; padding: 4px 6px; vertical-align: top; height: 32px; }
+            .blank td { height: 34px; }
+            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 14px; margin-top: -1px; }
+            .footer-table td { border-right: 1px solid #000; padding: 8px 10px; vertical-align: top; height: 44px; }
             .footer-table td:last-child { border-right: none; text-align: right; }
             .sign { font-weight: bold; text-align: right; }
           </style>
@@ -172,7 +175,7 @@ window.AppUtils = (() => {
                   <col class="col-less" />
                   <col class="col-net" />
                   <col class="col-pcs" />
-                  <col />
+                  <col class="col-process" />
                   <col />
                   <col />
                   <col />
@@ -264,7 +267,7 @@ window.AppUtils = (() => {
       )
       .join("");
 
-    const maxRows = 10;
+    const maxRows = 5;
     const blankRowCount = Math.max(0, maxRows - items.length);
     const blankRowsHtml = Array.from({ length: blankRowCount })
       .map(
@@ -292,29 +295,32 @@ window.AppUtils = (() => {
             * { box-sizing: border-box; }
             body { font-family: "Times New Roman", serif; margin: 0; padding: 6mm; color: #000; }
             @media print { html, body { height: 100%; } body { -webkit-print-color-adjust: exact; } }
-            .title { text-align: center; font-size: 15px; font-weight: bold; margin-bottom: 6px; }
-            .header-grid { border: 1px solid #000; border-bottom: none; padding: 6px; font-size: 9px; }
+            .title { text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+            .header-grid { border: 1px solid #000; border-bottom: none; padding: 10px; font-size: 13px; }
             .header-row { display: flex; justify-content: space-between; gap: 8px; }
             .header-row + .header-row { margin-top: 4px; }
             .label { font-weight: bold; }
-            .value { font-weight: bold; }
-            table { width: 100%; border-collapse: collapse; font-size: 10px; margin-top: -1px; }
+            .value { font-weight: bold; font-size: 14px; }
+            table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: -1px; }
             .col-desc { width: 36%; }
-            .col-gross { width: 10%; }
+            .col-gross { width: 12%; }
             .col-bags { width: 8%; }
             .col-less { width: 8%; }
             .col-net { width: 10%; }
             .col-pcs { width: 6%; }
+            .col-process { width: 6%; }
             th, td { border: 1px solid #000; padding: 3px; text-align: left; }
+            tbody tr:nth-child(-n+2) td { padding-top: 6px; padding-bottom: 6px; }
+            th { padding-top: 6px; padding-bottom: 6px; }
             th { text-align: center; font-weight: bold; }
             .num { text-align: right; }
-            .totals td { font-weight: bold; }
+            .totals td { font-weight: bold; padding-top: 8px; padding-bottom: 8px; }
             .page { min-height: 100%; display: flex; flex-direction: column; }
-            .content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+            .content { flex: 1; display: flex; flex-direction: column; gap: 0; }
             .spacer { flex: 1; }
-            .blank td { height: 22px; border-top: none; border-bottom: none; }
-            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 10px; }
-            .footer-table td { border-right: 1px solid #000; padding: 4px 6px; vertical-align: top; height: 32px; }
+            .blank td { height: 34px; }
+            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 14px; margin-top: -1px; }
+            .footer-table td { border-right: 1px solid #000; padding: 8px 10px; vertical-align: top; height: 44px; }
             .footer-table td:last-child { border-right: none; text-align: right; }
             .sign { font-weight: bold; text-align: right; }
           </style>
@@ -341,7 +347,7 @@ window.AppUtils = (() => {
                   <col class="col-less" />
                   <col class="col-net" />
                   <col class="col-pcs" />
-                  <col />
+                  <col class="col-process" />
                 </colgroup>
             <thead>
               <tr>
@@ -424,7 +430,7 @@ window.AppUtils = (() => {
       )
       .join("");
 
-    const maxRows = 10;
+    const maxRows = 5;
     const blankRowCount = Math.max(0, maxRows - items.length);
     const blankRowsHtml = Array.from({ length: blankRowCount })
       .map(
@@ -456,13 +462,13 @@ window.AppUtils = (() => {
             @page { margin: 6mm; }
             body { font-family: "Times New Roman", serif; margin: 0; padding: 6mm; color: #000; }
             @media print { html, body { height: 100%; } body { -webkit-print-color-adjust: exact; } }
-            .title { text-align: center; font-size: 15px; font-weight: bold; margin-bottom: 6px; }
-            .header-grid { border: 1px solid #000; border-bottom: none; padding: 6px; font-size: 9px; }
+            .title { text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+            .header-grid { border: 1px solid #000; border-bottom: none; padding: 10px; font-size: 13px; }
             .header-row { display: flex; justify-content: space-between; gap: 8px; }
             .header-row + .header-row { margin-top: 4px; }
             .label { font-weight: bold; }
-            .value { font-weight: bold; }
-            table { width: 100%; border-collapse: collapse; font-size: 10px; margin-top: -1px; }
+            .value { font-weight: bold; font-size: 14px; }
+            table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: -1px; }
             .col-desc { width: 36%; }
             .col-gross { width: 10%; }
             .col-bags { width: 8%; }
@@ -470,15 +476,17 @@ window.AppUtils = (() => {
             .col-net { width: 10%; }
             .col-pcs { width: 6%; }
             th, td { border: 1px solid #000; padding: 3px; text-align: left; }
+            tbody tr:nth-child(-n+2) td { padding-top: 6px; padding-bottom: 6px; }
+            th { padding-top: 6px; padding-bottom: 6px; }
             th { text-align: center; font-weight: bold; }
             .num { text-align: right; }
-            .totals td { font-weight: bold; }
+            .totals td { font-weight: bold; padding-top: 8px; padding-bottom: 8px; }
             .page { min-height: 100%; display: flex; flex-direction: column; }
-            .content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+            .content { flex: 1; display: flex; flex-direction: column; gap: 0; }
             .spacer { flex: 1; }
-            .blank td { height: 22px; border-top: none; border-bottom: none; }
-            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 10px; }
-            .footer-table td { border-right: 1px solid #000; padding: 4px 6px; vertical-align: top; height: 32px; }
+            .blank td { height: 34px; }
+            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-size: 14px; margin-top: -1px; }
+            .footer-table td { border-right: 1px solid #000; padding: 8px 10px; vertical-align: top; height: 44px; }
             .footer-table td:last-child { border-right: none; text-align: right; }
             .sign { font-weight: bold; text-align: right; }
           </style>
